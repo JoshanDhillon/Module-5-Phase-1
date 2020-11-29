@@ -1,0 +1,98 @@
+import javax.swing.*;
+import java.awt.*;
+public class Assign5
+{
+	// Static variables 
+	static final int NUM_CARD_IMAGES = 57;
+	static Icon[] icon = new ImageIcon[NUM_CARD_IMAGES];
+	
+	
+	// turns 0 - 13 into "A", "2", "3", ... "Q", "K", "X"
+	static String turnIntIntoCardValue(int k)
+	{
+		String[] valueConvert = {"A", "2", "3", "4", "5", "6", "7", "8", "9",
+				"T", "J", "Q", "K", "X"};
+		if (k < 0 || k > valueConvert.length - 1)
+		{
+			return "Not Valid!";
+		}
+		else
+		{
+			return valueConvert[k];
+		}
+	}
+	
+	
+	// turns 0 - 3 into "C", "D", "H", "S"
+	static String turnIntIntoCardSuit(int j)
+	{
+		String[] suitConvert = {"C", "D", "H", "S"};
+		if (j < 0 || j > suitConvert.length - 1)
+		{
+			return "Not Valid";
+		}
+		else
+		{
+			return suitConvert[j];
+		}
+	}
+	
+	
+	/* Builds file names, each file name is used to instantiate each of the 57
+	 * Icons in the icon[] array
+	 */
+	static void loadCardIcons()
+	{
+		int count = 0;
+		int suit;
+		int value;
+		String imageDirectory = "images/";
+	
+	
+		for(suit = 0; suit < 4; ++suit)
+		{
+			for(value = 0; value < 14; ++value)
+			{
+				String concat = imageDirectory + turnIntIntoCardValue(value) + 
+						turnIntIntoCardSuit (suit) +
+						".gif";
+				icon[count] = new ImageIcon(concat);
+				count++;
+			}
+		}
+		String concat = imageDirectory + "BK.gif";
+		icon[count] = new ImageIcon(concat);
+	}	
+
+	
+	// a simple main to throw all the JLabels out there for the world to see
+	public static void main(String[] args)
+   {
+      int k;
+      
+      // prepare the image icon array
+      loadCardIcons();
+      
+      // establish main frame in which program will run
+      JFrame frmMyWindow = new JFrame("Card Room");
+      frmMyWindow.setSize(1150, 650);
+      frmMyWindow.setLocationRelativeTo(null);
+      frmMyWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      
+      // set up layout which will control placement of buttons, etc.
+      FlowLayout layout = new FlowLayout(FlowLayout.CENTER, 5, 20);   
+      frmMyWindow.setLayout(layout);
+      
+      // prepare the image label array
+      JLabel[] labels = new JLabel[NUM_CARD_IMAGES];
+      for (k = 0; k < NUM_CARD_IMAGES; k++)
+         labels[k] = new JLabel(icon[k]);
+      
+      // place your 3 controls into frame
+      for (k = 0; k < NUM_CARD_IMAGES; k++)
+         frmMyWindow.add(labels[k]);
+
+      // show everything to the user
+      frmMyWindow.setVisible(true);
+   }
+}
