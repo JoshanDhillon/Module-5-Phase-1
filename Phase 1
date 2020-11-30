@@ -10,31 +10,16 @@ public class Assign5
 	// turns 0 - 13 into "A", "2", "3", ... "Q", "K", "X"
 	static String turnIntIntoCardValue(int k)
 	{
-		String[] valueConvert = {"A", "2", "3", "4", "5", "6", "7", "8", "9",
-				"T", "J", "Q", "K", "X"};
-		if (k < 0 || k > valueConvert.length - 1)
-		{
-			return "Not Valid!";
-		}
-		else
-		{
-			return valueConvert[k];
-		}
+		String valueConvert = "A23456789TJQKX";
+		return String.valueOf(valueConvert.charAt(k));
 	}
 	
 	
 	// turns 0 - 3 into "C", "D", "H", "S"
 	static String turnIntIntoCardSuit(int j)
 	{
-		String[] suitConvert = {"C", "D", "H", "S"};
-		if (j < 0 || j > suitConvert.length - 1)
-		{
-			return "Not Valid";
-		}
-		else
-		{
-			return suitConvert[j];
-		}
+		String suitConvert = "CDHS";
+		return String.valueOf(suitConvert.charAt(j));
 	}
 	
 	
@@ -46,53 +31,50 @@ public class Assign5
 		int count = 0;
 		int suit;
 		int value;
-		String imageDirectory = "images/";
+		String imagePath = "/Users/joshandhillon/Desktop/images";
 	
 	
 		for(suit = 0; suit < 4; ++suit)
 		{
 			for(value = 0; value < 14; ++value)
 			{
-				String concat = imageDirectory + turnIntIntoCardValue(value) + 
+				String concat = imagePath + turnIntIntoCardValue(value) + 
 						turnIntIntoCardSuit (suit) +
 						".gif";
-				icon[count] = new ImageIcon(concat);
-				count++;
+				icon[count++] = new ImageIcon(imagePath + concat);
 			}
 		}
-		String concat = imageDirectory + "BK.gif";
-		icon[count] = new ImageIcon(concat);
+		icon [count++] = new ImageIcon(imagePath + "BK.gif");
 	}	
 
 	
-      	// a simple main to throw all the JLabels out there for the world to see
-      	public static void main(String[] args)
-      	{
-      		int k;
-      
-      		// prepare the image icon array
-      		loadCardIcons();
-      
-      		// establish main frame in which program will run
-      		JFrame frmMyWindow = new JFrame("Card Room");
-      		frmMyWindow.setSize(1150, 650);
-      		frmMyWindow.setLocationRelativeTo(null);
-      		frmMyWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      
-      		// set up layout which will control placement of buttons, etc.
-      		FlowLayout layout = new FlowLayout(FlowLayout.CENTER, 5, 20);   
-      		frmMyWindow.setLayout(layout);
-      
-      		// prepare the image label array
-      		JLabel[] labels = new JLabel[NUM_CARD_IMAGES];
-      		for (k = 0; k < NUM_CARD_IMAGES; k++)
-        		labels[k] = new JLabel(icon[k]);
-      
-      		// place your 3 controls into frame
-      		for (k = 0; k < NUM_CARD_IMAGES; k++)
-        		frmMyWindow.add(labels[k]);
-
-      		// show everything to the user
-      		frmMyWindow.setVisible(true);
+	public static void main (String[] args)
+	{
+		int k;
+		
+		// prepare the image icon array
+		loadCardIcons();
+		
+		// establish main frame in which program will run
+		JFrame frmMyWindow = new JFrame("Card Room");
+		frmMyWindow.setSize(1150, 650);
+		frmMyWindow.setLocationRelativeTo(null);
+		frmMyWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		// set up layout which will control placement of buttons, etc.
+		FlowLayout layout = new FlowLayout(FlowLayout.CENTER, 5, 20);
+		frmMyWindow.setLayout(layout);
+		
+		// prepare image label array
+		JLabel[] labels = new JLabel[NUM_CARD_IMAGES];
+		for (k = 0; k < NUM_CARD_IMAGES; k++)
+			labels[k] = new JLabel(icon[k]);
+		
+		// place your 3 controls into frame
+		for (k = 0; k < NUM_CARD_IMAGES; k++)
+			frmMyWindow.add(labels[k]);
+		
+		// show everything to user
+		frmMyWindow.setVisible(true);
 	}
 }
