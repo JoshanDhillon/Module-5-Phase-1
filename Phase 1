@@ -31,7 +31,7 @@ public class Assign5
 		int count = 0;
 		int suit;
 		int value;
-		String imagePath = "/Users/joshandhillon/Desktop/images";
+		String imagePath = "images/";
 	
 	
 		for(suit = 0; suit < 4; ++suit)
